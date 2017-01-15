@@ -1,17 +1,12 @@
-
 var interval = 1000;
-
 $(document).ready(function () {
     // remove attr disabled
     $('.classCheckChon').removeAttr("disabled");
-
     // Form Submitting after 1 seconds.
     var auto_refresh = setInterval(function () {
         doSubmit();
         registerSubject();
-
     }, interval);
-
     function registerSubject() {
         var mypath = AddressUrl;
         var hideval = $('#chk_hidden').val();
@@ -33,7 +28,6 @@ $(document).ready(function () {
                  console.log(err);
             });
     }
-
     function doSubmit() {
         document.forms.Frm.hdID.value = "";
         for (var i = 0; i < document.forms.Frm.elements.length; i++) {
