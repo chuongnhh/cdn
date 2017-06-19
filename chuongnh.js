@@ -21,7 +21,6 @@ function mydoSubmitAll() {
             document.forms.Frm.elements[i].checked == true
             document.forms.Frm.hdID.value += document.forms.Frm.elements[i].id + "|";
             myAjaxDangKiHocPhan();
-            console.log("xxxxxxx");
         }
     }
     //location.reload();
@@ -39,7 +38,7 @@ function myAjaxDangKiHocPhan() {
         async: true,
         dataType: 'html',
         success: function (html) {
-            //console.log(html);
+            console.log(html);
             $('#notify').html(html + '(' + (++submit_count) + ')');
         }
     })
@@ -58,7 +57,7 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     var interval = null;
     // remove attr disabled
     $('.classCheckChon').removeAttr("disabled");
-    $('td').prepend("<span id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</span>");
+    $('form').append("<span id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</span>");
 
     $('.button')[0].onclick = null;
     $('.button')[1].onclick = null;
@@ -106,5 +105,5 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     }, false);
 }
 else {
-    PopupDanhSachLop('162ECOM430984', 'lmgPbT9QJCU=');
+    //PopupDanhSachLop('162ECOM430984', 'lmgPbT9QJCU=');
 }
