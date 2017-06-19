@@ -1,0 +1,109 @@
+
+function PopupDanhSachLop(StudyUnitID, CurriculumID) {
+    window.open(AddressUrl + '/' + 'DangKiNgoaiKeHoach/DanhSachLopHocPhan/' + StudyUnitID + "?CurriculumID=" + CurriculumID + "&t=" + Math.random(), '_blank');
+}
+
+function mydoSubmit() {
+    document.forms.Frm.hdID.value = "";
+    for (var i = 0; i < document.forms.Frm.elements.length; i++) {
+        if (document.forms.Frm.elements[i].type == "radio") {
+            if (document.forms.Frm.elements[i].checked == true) {
+                document.forms.Frm.hdID.value += document.forms.Frm.elements[i].id + "|";
+            }
+        }
+    }
+}
+
+function mydoSubmitAll() {
+    document.forms.Frm.hdID.value = "";
+    for (var i = 0; i < document.forms.Frm.elements.length; i++) {
+        if (document.forms.Frm.elements[i].type == "radio") {
+            document.forms.Frm.elements[i].checked == true
+            document.forms.Frm.hdID.value += document.forms.Frm.elements[i].id + "|";
+            myAjaxDangKiHocPhan();
+        }
+    }
+    //location.reload();
+}
+
+var submit_count = 0;
+function myAjaxDangKiHocPhan() {
+    var mypath = AddressUrl;
+    var hideval = $('#chk_hidden').val();
+    var StudyUnitID = $('#StudyUnitID').val();
+    var CurriculumID = $('#CurriculumID').val();
+    $.ajax({
+        type: 'GET',
+        url: mypath + '/DangKiHocPhan?StudyUnitID=' + StudyUnitID + '&CurriculumID=' + CurriculumID + '&Hide=' + hideval + '&t=' + Math.random(),
+        async: true,
+        dataType: 'html',
+        success: function (html) {
+            console.log(html);
+            $('#notify').html(html + '(' + (++submit_count) + ')');
+        }
+    })
+        .fail(
+        function (jqXHR, textStatus, err) {
+            console.log(err);
+        });
+}
+
+if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
+
+    //===========================================================
+    //$('table').addClass('table table-bordered');
+    //$('.button').addClass('btn btn-primary');
+    //===========================================================
+    var interval = null;
+    // remove attr disabled
+    $('.classCheckChon').removeAttr("disabled");
+    $('form').append("<span id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</span>");
+
+    $('.button')[0].onclick = null;
+    //$('.button')[1].onclick = null;
+    //$('.button')[1].value = 'Đăng ký (All)';
+
+    $('.button')[0].addEventListener('click', function () {
+        if ($('.button')[0].value.indexOf('Đăng ký') != -1) {
+
+            var time = prompt("Tốc độ gửi request (mili s):", 1000);
+            if (time != null) {
+                interval = setInterval(function () {
+                    mydoSubmit();
+                    myAjaxDangKiHocPhan();
+                    console.log("mydoSubmit time: " + time);
+                }, time);
+                $('.button')[0].value = 'Dừng lại';
+                $('.button')[1].disabled = true;
+            }
+        } else {
+            clearInterval(interval);
+
+            $('.button')[0].value = 'Đăng ký';
+            $('.button')[1].disabled = false;
+        }
+    }, false);
+
+
+    // $('.button')[1].addEventListener('click', function () {
+    //     if ($('.button')[1].value.indexOf('Đăng ký (All)') != -1) {
+    //         var time = prompt("Tốc độ gửi request (mili s):", 1000);
+
+    //         if (time != null) {
+    //             interval = setInterval(function () {
+    //                 mydoSubmitAll();
+    //                 console.log("mydoSubmitAll time: " + time);
+    //             }, time);
+    //             $('.button')[1].value = 'Dừng lại (All)';
+    //             $('.button')[0].disabled = true;
+    //         }
+    //     } else {
+    //         clearInterval(interval);
+    //         $('.button')[1].value = 'Đăng ký (All)';
+    //         $('.button')[0].disabled = false;
+    //     }
+    // }, false);
+}
+else {
+    //PopupDanhSachLop('162ECOM430984', 'lmgPbT9QJCU=');
+}
