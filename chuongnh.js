@@ -60,13 +60,13 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     $('form').append("<span id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</span>");
 
     $('.button')[0].onclick = null;
-    $('.button')[1].onclick = null;
-    $('.button')[1].value = 'Đăng ký (All)';
+    //$('.button')[1].onclick = null;
+    //$('.button')[1].value = 'Đăng ký (All)';
 
     $('.button')[0].addEventListener('click', function () {
         if ($('.button')[0].value.indexOf('Đăng ký') != -1) {
 
-            var time = prompt("Vui lòng nhập thời gian cho mỗi lần submit:", 1000);
+            var time = prompt("Tốc độ gửi request (mili s):", 1000);
             if (time != null) {
                 interval = setInterval(function () {
                     mydoSubmit();
@@ -85,24 +85,24 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     }, false);
 
 
-    $('.button')[1].addEventListener('click', function () {
-        if ($('.button')[1].value.indexOf('Đăng ký (All)') != -1) {
-            var time = prompt("Vui lòng nhập thời gian cho mỗi lần submit:", 1000);
+    // $('.button')[1].addEventListener('click', function () {
+    //     if ($('.button')[1].value.indexOf('Đăng ký (All)') != -1) {
+    //         var time = prompt("Tốc độ gửi request (mili s):", 1000);
 
-            if (time != null) {
-                interval = setInterval(function () {
-                    mydoSubmitAll();
-                    console.log("mydoSubmitAll time: " + time);
-                }, time);
-                $('.button')[1].value = 'Dừng lại (All)';
-                $('.button')[0].disabled = true;
-            }
-        } else {
-            clearInterval(interval);
-            $('.button')[1].value = 'Đăng ký (All)';
-            $('.button')[0].disabled = false;
-        }
-    }, false);
+    //         if (time != null) {
+    //             interval = setInterval(function () {
+    //                 mydoSubmitAll();
+    //                 console.log("mydoSubmitAll time: " + time);
+    //             }, time);
+    //             $('.button')[1].value = 'Dừng lại (All)';
+    //             $('.button')[0].disabled = true;
+    //         }
+    //     } else {
+    //         clearInterval(interval);
+    //         $('.button')[1].value = 'Đăng ký (All)';
+    //         $('.button')[0].disabled = false;
+    //     }
+    // }, false);
 }
 else {
     //PopupDanhSachLop('162ECOM430984', 'lmgPbT9QJCU=');
