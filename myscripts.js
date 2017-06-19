@@ -39,7 +39,7 @@ function myAjaxDangKiHocPhan() {
         dataType: 'html',
         success: function (html) {
             console.log(html);
-            $('#notify').html(html + '(' + (++submit_count) + ')');
+            $('#notify').html('<b>'+html + '(' + (++submit_count) + ')</b>');
         }
     })
         .fail(
@@ -57,7 +57,7 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     var interval = null;
     // remove attr disabled
     $('.classCheckChon').removeAttr("disabled");
-    $('form').append("<span id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</span>");
+    $('form').append("<b id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</b>");
 
     $('.button')[0].onclick = null;
     //$('.button')[1].onclick = null;
