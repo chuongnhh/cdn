@@ -3,6 +3,55 @@ function PopupDanhSachLop(StudyUnitID, CurriculumID) {
     window.open(AddressUrl + '/' + 'DangKiNgoaiKeHoach/DanhSachLopHocPhan/' + StudyUnitID + "?CurriculumID=" + CurriculumID + "&t=" + Math.random(), '_blank');
 }
 
+var countDel = 0;
+//confirm delete dialog :
+function ConfirmDelete(MaHocPhan) {
+    $.messager.confirm("Lưu ý ", "Bạn có muốn xóa học phần '" + MaHocPhan + "' không ?", function (r) {
+        if (r) {
+            var time = prompt("Tốc độ gửi request (mili s):", 1000);
+            $('#DanhSachHocPhanDaDangKi').append("<b id='notify-delete'></b>");
+            if (time != null) {
+                setInterval(function () {
+                    myXoaHocPhan(MaHocPhan);
+                }, time);
+            }
+        }
+        else {
+            //false
+        }
+    });
+}
+
+function myXoaHocPhan(MaHocPhan) {
+    //ProgressShow();
+    var mypath = AddressUrl;
+    try {
+        $.ajax({
+            type: 'GET',
+            url: mypath + '/DangKiThanhCong/DeleteHocPhan/' + MaHocPhan + "?t=" + Math.random(),
+            async: true,
+            dataType: 'html',
+            success: function (html) {
+                $('#notify-delete').html('<b>[' + MaHocPhan + '] ' + html + '(' + (++countDel) + ')</b>');
+                console.log(html);
+                //DanhSachHocPhanDaDangKi();
+                //ProgressHide();
+                //DialogAlert("Thông báo", html, "info");
+            },
+        })
+            .fail(
+            function (jqXHR, textStatus, err) {
+                // ProgressHide();
+                //DialogAlert("Lỗi kết nối", "Kết nối không thành công :"+ err, "error");
+                console.log("Kết nối không thành công :" + err);
+            });
+    }
+    catch (err_) {
+        //ProgressHide();
+    }
+
+}
+
 function mydoSubmit() {
     document.forms.Frm.hdID.value = "";
     for (var i = 0; i < document.forms.Frm.elements.length; i++) {
@@ -39,7 +88,7 @@ function myAjaxDangKiHocPhan() {
         dataType: 'html',
         success: function (html) {
             console.log(html);
-            $('#notify').html('<b>'+html + '(' + (++submit_count) + ')</b>');
+            $('#notify').html('<b>' + html + '(' + (++submit_count) + ')</b>');
         }
     })
         .fail(
