@@ -114,8 +114,8 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
 
     $('.button')[0].addEventListener('click', function () {
         if ($('.button')[0].value.indexOf('Đăng ký') != -1) {
-
-            var time = prompt("Tốc độ gửi request (mili s):", 1000);
+            alert('Server đang bảo trì, vui lòng quay lại sau!');
+            /*var time = prompt("Tốc độ gửi request (mili s):", 1000);
             if (time != null) {
                 interval = setInterval(function () {
                     mydoSubmit();
@@ -124,7 +124,7 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
                 }, time);
                 $('.button')[0].value = 'Dừng lại';
                 $('.button')[1].disabled = true;
-            }
+            }*/
         } else {
             clearInterval(interval);
 
