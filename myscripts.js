@@ -115,6 +115,7 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     $('.button')[0].addEventListener('click', function () {
         if ($('.button')[0].value.indexOf('Đăng ký') != -1) {
             alert('Server đang bảo trì, vui lòng quay lại sau!');
+            return;
             /*var time = prompt("Tốc độ gửi request (mili s):", 1000);
             if (time != null) {
                 interval = setInterval(function () {
