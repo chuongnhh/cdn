@@ -127,10 +127,10 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
                 $('.button')[1].disabled = true;
             }*/
         } else {
-            clearInterval(interval);
+            //clearInterval(interval);
 
-            $('.button')[0].value = 'Đăng ký';
-            $('.button')[1].disabled = false;
+            //$('.button')[0].value = 'Đăng ký';
+            //$('.button')[1].disabled = false;
         }
     }, false);
 
