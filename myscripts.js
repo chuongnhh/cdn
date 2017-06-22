@@ -114,7 +114,7 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
 
     $('.button')[0].addEventListener('click', function () {
         if ($('.button')[0].value.indexOf('Đăng ký') != -1) {
-            alert('Server đang bảo trì, vui lòng quay lại sau!');
+            alert('Đây là ứng dụng dùng thử, để tôn trọng người làm sản phẩm các bạn vui lòng gửi "phản hồi đánh giá sản phẩm" cho chúng tôi!');
             return;
             /*var time = prompt("Tốc độ gửi request (mili s):", 1000);
             if (time != null) {
