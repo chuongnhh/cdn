@@ -109,6 +109,7 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     $('form').append("<b id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</b>");
 
     $('.button')[0].onclick = null;
+    $('.button')[0].type = 'button';
     //$('.button')[1].onclick = null;
     //$('.button')[1].value = 'Đăng ký (All)';
 
