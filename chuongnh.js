@@ -63,6 +63,17 @@ function mydoSubmit() {
     }
 }
 
+function mydoSubmit_2() {
+    document.forms.frmform.hdID.value = "";
+    for (var i = 0; i < document.forms.frmform.elements.length; i++) {
+        if (document.forms.frmform.elements[i].type == "radio") {
+            if (document.forms.frmform.elements[i].checked == true) {
+                document.forms.frmform.hdID.value += document.forms.frmform.elements[i].id + "|";
+            }
+        }
+    }
+}
+
 function mydoSubmitAll() {
     document.forms.Frm.hdID.value = "";
     for (var i = 0; i < document.forms.Frm.elements.length; i++) {
@@ -97,8 +108,9 @@ function myAjaxDangKiHocPhan() {
         });
 }
 
-if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
 
+if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
+    console.log('DanhSachLopHocPhan');
     //===========================================================
     //$('table').addClass('table table-bordered');
     //$('.button').addClass('btn btn-primary');
@@ -153,6 +165,40 @@ if (window.location.href.indexOf('DanhSachLopHocPhan') != -1) {
     //         $('.button')[0].disabled = false;
     //     }
     // }, false);
+}
+else if (window.location.href.indexOf('DangkiKhac') != -1) {
+
+    console.log('DangkiKhac');
+    var interval = null;
+    // remove attr disabled
+    $('.classCheckChon').removeAttr("disabled");
+    $('form').append("<b id='notify'>Vui lòng chọn lớp và nhấn nút đăng ký.</b>");
+
+    $('.button')[1].onclick = null;
+    //$('.button')[1].type = 'button';
+    //$('.button')[1].onclick = null;
+    //$('.button')[1].value = 'Đăng ký (All)';
+
+    $('.button')[1].addEventListener('click', function () {
+        if ($('.button')[1].value.indexOf('Đăng ký') != -1) {
+
+            var time = prompt("Tốc độ gửi request (mili s):", 1000);
+            if (time != null) {
+                interval = setInterval(function () {
+                    mydoSubmit_2();
+                    myAjaxDangKiHocPhan();
+                    console.log("mydoSubmit time: " + time);
+                }, time);
+                $('.button')[1].value = 'Dừng lại';
+                //$('.button')[1].disabled = true;
+            }
+        } else {
+            clearInterval(interval);
+
+            $('.button')[1].value = 'Đăng ký';
+            //$('.button')[1].disabled = false;
+        }
+    }, false);
 }
 else {
     //PopupDanhSachLop('162ECOM430984', 'lmgPbT9QJCU=');
